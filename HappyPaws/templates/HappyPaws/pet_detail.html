@@ -1,0 +1,29 @@
+{% extends "HappyPaws/base.html" %}
+{% load static %}
+
+{% block main%}
+<br>
+"Nombre="{{object.nombre}}
+<br>
+{{object.raza}}
+<br>
+{{object.fecha}}
+<br>
+{{object.tel}}
+<br>
+{{object.mail}}
+<br>
+{{object.ciudad}}
+<br>
+{{object.estado}} 
+
+<br>
+
+<a href="{% url 'pet-list'%}"> Volver </a>
+
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,25 @@
+{% extends "HappyPaws/base.html" %}  <!-- herencia de base.html-->
+
+{% load static %}
+{% block main %}
+ 
+<ul>
+    <br>
+    
+    <h4> -Registro de Usuario- </h4>
+    
+    <form method="POST">           <!-- no usa action porque usa la misma url para escribir en la BD-->
+     
+    {% csrf_token %}   
+     {{form.as_p}}
+
+    <input type="submit" value="Registrar Usuario">
+   
+    </form>
+      
+
+</ul>
+
+
+
+{% endblock %}
