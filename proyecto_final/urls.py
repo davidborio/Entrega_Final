@@ -18,6 +18,8 @@ from django.urls import path
 from HappyPaws.views import (index, FormPrueba, crearmascota, PetList,
                              PetDetail,PetCreate,PetUpdate,PetDelete,BuscarPet, SignUp, Login,Logout)
 
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,3 +37,4 @@ urlpatterns = [
     path("logout/", Logout.as_view(), name="logout")
     
     ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

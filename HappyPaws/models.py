@@ -11,6 +11,7 @@ class Pet(models.Model):
     ciudad=models.CharField(max_length=50)
     estado=models.CharField(max_length=100, default="En adopción")
     owner=models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="owner")
+    imagen=models.ImageField(upload_to="images",null=True,blank=True)
 
 
     def __str__(self):
