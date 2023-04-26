@@ -11,8 +11,8 @@
               <img src="{% static 'HappyPaws\assets\image1.jpg' %}">
             <div class="container">
               <div class="carousel-caption text-start">
-                <h1>Patitas Felices</h1>
-                <p>Alguien increíble te está esperando</p>
+                <h1 style="color: black;">Patitas Felices</h1>
+                <p style="color: black;">Alguien increíble te está esperando</p>
                 <p><a class="btn btn-lg btn-primary" href="{% url 'pet-list' %}">Ver todos</a></p>
               </div>
             </div>
@@ -23,8 +23,8 @@
           <img src="{% static 'HappyPaws\assets\image2.jpg' %}">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Patitas Felices</h1>
-              <p>Dar es dar</p>
+              <h1 style="color: black;">Patitas Felices</h1>
+              <p style="color: black;">Dar es dar</p>
               <p><a class="btn btn-lg btn-primary" href="{% url 'login' %}">Iniciar sesión</a></p>
             </div>
           </div>
@@ -34,8 +34,8 @@
           <img src="{% static 'HappyPaws\assets\image3.jpg' %}">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Patitas Felices</h1>
-              <p>Buscales un hogar</p>
+              <h1 style="color: black;">Patitas Felices</h1>
+              <p style="color: black;">Buscales un hogar</p>
               <p><a class="btn btn-lg btn-primary" href="{% url 'pet-create' %}">Publica</a></p>
             </div>
           </div>
@@ -45,8 +45,8 @@
           <img src="{% static 'HappyPaws\assets\image4.jpg' %}">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Patitas Felices</h1>
-              <p>Unite</p>
+              <h1 style="color: black;">Patitas Felices</h1>
+              <p style="color: black;">Unite</p>
               <p><a class="btn btn-lg btn-primary" href="{% url 'signup' %}">Registrarme</a></p>
             </div>
           </div>
@@ -77,17 +77,18 @@
     <!-- Three columns of text below the carousel -->
     <div class="row">
 
-      {% for pet in pets %}
+      {% if pets %}
 
+      {% for pet in pets %}
       <div class="col-lg-4">
         <img src="{{pet.imagen.url}}" height="144" width="144">
         <h2>{{pet.raza}}</h2>
         <p>{{pet.ciudad}}</p>
         <p><a class="btn btn-secondary" href="{% url 'pet-detail' pet.id %}">Ver más</a></p>
-      </div><!-- /.col-lg-4 -->
+      </div><!-- /.col-lg-4 -->    
     
-      
       {% endfor %}
+      {% endif %}
     </div><!-- /.row -->
 
 
@@ -98,12 +99,12 @@
 
     <div class="row featurette">
       <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">El puente</h2>
-        <p class="lead">vistas lindas del rio</p>
+        <h2 class="featurette-heading">Tu mejor companía</h2>
+        <p class="lead">Estarán siempre con vos</p>
       </div>
       <div class="col-md-5 order-md-1">
         
-          <img src="./curso_coder_house_files/puente-corrientes-resistencia.jpeg" height="400" width="400">
+          <img src="{% static 'HappyPaws\assets\family1.jpg' %}" height="100%" width="400">
         
 
       </div>
@@ -114,12 +115,42 @@
 
     <div class="row featurette">
       <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Las cataratas</h2>
-        <p class="lead">un destino imperdible</p>
+        <h2 class="featurette-heading">Compañero de aventuras</h2>
+        <p class="lead">Ideal para los niños</p>
       </div>
       <div class="col-md-5 order-md-1">
         
-          <img src="./curso_coder_house_files/cataratas-del-iguazu-misiones.jpeg" height="400" width="400">
+          <img src="{% static 'HappyPaws\assets\family3.jpg' %}" height="100%" width="400">
+        
+
+      </div>
+    </div>
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">La familia se agranda</h2>
+        <p class="lead">Será una parte importante de tu familia.</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        
+          <img src="{% static 'HappyPaws\assets\family4.jpg' %}" height="100%" width="400">
+        
+
+      </div>
+
+      
+    </div>
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">Un amigo para siempre</h2>
+        <p class="lead">Te acompañará toda tu vida, marcará tu Historia</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        
+          <img src="{% static 'HappyPaws\assets\friends1.jpg' %}" height="100%" width="400">
         
 
       </div>
