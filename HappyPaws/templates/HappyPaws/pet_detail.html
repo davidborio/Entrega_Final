@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block main%}
+{% if object.imagen %}
 <img src="{{ object.imagen.url }}" width="320px" height="100%">
+{% endif %}
+
+{{object}}
 <br>
 "Nombre="{{object.nombre}}
 <br>
@@ -23,7 +27,7 @@
 
 <br>
 
-<a href="{% url 'pet-list'%}"> Volver </a>
+<a href="{% url 'pet-list' %}"> Volver </a>
 
 {% endblock %}
 

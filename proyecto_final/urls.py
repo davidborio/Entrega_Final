@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from HappyPaws.views import (index, FormPrueba, crearmascota, PetList,
-                             PetDetail,PetCreate,PetUpdate,PetDelete,BuscarPet, SignUp, Login,Logout)
+                             PetDetail,PetCreate,PetUpdate,PetDelete,BuscarPet, SignUp, Login,Logout,ProfileUpdate)
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -34,7 +34,8 @@ urlpatterns = [
     path("pet/buscar", BuscarPet.as_view(), name="pet-buscar"),
     path("signup/", SignUp.as_view(), name="signup"),
     path("login/", Login.as_view(), name="login"),
-    path("logout/", Logout.as_view(), name="logout")
+    path("logout/", Logout.as_view(), name="logout"),
+    path("profile/<pk>/update", ProfileUpdate.as_view(), name="profile-update")
     
     ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

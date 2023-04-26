@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DetailView,DeleteView
 #from django.views.generic.detail import DetailView
-from HappyPaws.models import Pet
+from HappyPaws.models import Pet,Profile
 from HappyPaws.forms import PetForms,BuscarPetForm
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
@@ -9,7 +9,10 @@ from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin , UserPassesTestMixin
 
 def index(request):
-    return render(request,"HappyPaws/index.html")
+    context={
+        "pets":Pet.objects.all()
+    }
+    return render(request,"HappyPaws/index.html",context)
 
 def FormPrueba(request):
     return render(request, "HappyPaws/FormPrueba.html")
@@ -79,6 +82,11 @@ class Login(LoginView):
 
 class Logout(LogoutView):
     template_name='registration/logout.html'
+
+class ProfileUpdate(UpdateView):
+    model=Profile
+    success_url= reverse_lazy("index")
+    fields='__all__'
 
 
 

@@ -16,6 +16,11 @@ class Pet(models.Model):
 
     def __str__(self):
         return f"Identificación: {self.id} - Creado el: {self.fecha} - Nombre: {self.nombre} - Estado: {self.estado}"
+    
+class Profile(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE,related_name="profile")
+    imagen=models.ImageField(upload_to="profiles",null=True,blank=True)
+
         
 
 
