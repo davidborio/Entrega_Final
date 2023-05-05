@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from HappyPaws.views import (index, FormPrueba, crearmascota, PetList,
+from HappyPaws.views import (index, PetList,
                              PetDetail,PetCreate,PetUpdate,PetDelete,BuscarPet, SignUp, Login,Logout,ProfileUpdate)
 
 from django.conf import settings
@@ -23,9 +23,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",index, name="index"),
-    path("formulario", FormPrueba),
-    path("crear_mascota", crearmascota, name="crear-mascota"),
+    path("",index, name="index"),    
     path("pet/list", PetList.as_view(), name="pet-list"),
     path("pet/<pk>/detail", PetDetail.as_view(), name="pet-detail"),
     path("pet/create", PetCreate.as_view(), name="pet-create"),

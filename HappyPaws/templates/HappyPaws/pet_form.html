@@ -2,13 +2,18 @@
 
 {% load static %}
 {% block main %}
-      
-<form method="POST" enctype="multipart/form-data">           <!-- no usa action porque usa la misma url para escribir en la BD-->
- {% csrf_token %}   
- {{form.as_p}}
-<input type="submit" value="Guardar"> <a href="{% url 'pet-list' %}"> Volver </a>
-</form>
+ 
+<p>
+    <ul>      
+        <form method="POST" enctype="multipart/form-data">           <!-- no usa action porque usa la misma url para escribir en la BD-->
+            {% csrf_token %}   
+            {{form.as_p}}
+        <input type="submit" value="Guardar"> 
+   <ul>  
 
+   </form>   
 
+</p>
+<a href="{% url 'index' %}"> >> Volver << </a>
 
 {% endblock %}

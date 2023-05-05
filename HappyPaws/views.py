@@ -14,15 +14,11 @@ def index(request):
     }
     return render(request,"HappyPaws/index.html",context)
 
-def FormPrueba(request):
-    return render(request, "HappyPaws/FormPrueba.html")
-
 
 def crearmascota(request):
     f=PetForms()
     f=PetForms(request.POST)
     context = {'f':f}
-
 
     return render(request,"HappyPaws/crear_mascota.html",context)
 

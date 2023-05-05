@@ -7,8 +7,8 @@
 <p>
     <ul>
         {% for pet in object_list %}
-        <li>
-    
+        <br>
+        <li>                
             {{pet}}     
             
             <a href= "{% url 'pet-detail' pet.id %}" > Ver Detalle </a>   
