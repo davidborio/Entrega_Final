@@ -1,0 +1,28 @@
+{% extends "HappyPaws/base.html" %}
+{% load static %}
+{% block main %}
+
+<p>
+    <ul>
+        <h1> ~Lista de Mensajes~ </h1>
+
+      
+    {% for mensaje in object_list %}
+        <br>
+        <li>                
+            {{mensaje}}   
+            <a href= "{% url 'mensaje-detail' mensaje.id %}" > Ver Mensaje </a>  /
+            <a href= "{% url 'mensaje-delete' mensaje.id %}"> Borrar Mensaje </a>         
+        </li>
+    {% endfor %}  
+</ul>
+</p>
+
+{% if user.is_authenticated and mensaje.destinatario == user %} 
+            /          
+            <a href= "{% url 'mensaje-delete' mensaje.id %}" > Eliminar </a>  
+            {% endif %}
+
+{% endblock %}
+
+    

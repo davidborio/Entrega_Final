@@ -3,10 +3,14 @@
 {% block main %}
 
 <label for="id_criterio_raza">Criterio:</label>
-        <input type="text" name="criterio_raza" maxlength="50" required="" id="id_criterio_raza">
+
 <p>
+   
     <ul>
-        {% for pet in object_list %}
+        <h1> ~Publicaciones~ </h1>         
+    
+        
+    {% for pet in object_list %}
         <br>
         <li>                
             {{pet}}     
@@ -14,18 +18,14 @@
             <a href= "{% url 'pet-detail' pet.id %}" > Ver Detalle </a>   
             {% if user.is_authenticated and pet.owner == user %} 
             /          
-            <a href= "{% url 'pet-update' pet.id %}" > Modificar </a>  /
-            <a href= "{% url 'pet-delete' pet.id %}" > Eliminar </a>  
-            {% endif %}
-
-    
+                <a href= "{% url 'pet-update' pet.id %}" > Editar </a>  /
+                <a href= "{% url 'pet-delete' pet.id %}" > Eliminar </a>  
+            {% endif %}    
         </li>
     {% endfor %}  
     
     
     </ul>
-
-
 </p>
 
 {% endblock %}

@@ -13,3 +13,5 @@ class PetForms(forms.Form):
 class BuscarPetForm(forms.Form):
     criterio_raza=forms.CharField(max_length= 50)
     criterio_ciudad=forms.CharField(max_length=50)
+
+

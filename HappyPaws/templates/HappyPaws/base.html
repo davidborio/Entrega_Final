@@ -74,22 +74,38 @@
           </li>
           
           {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'pet-create' %}"> Publicar </a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}"> {{ user.username}} | Salir </a>
-          </li>
-          <li class="nav-item">
-            {% else %}           
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'pet-create' %}"> Publicar </a>
+            </li>
             
-            <a class="nav-link active" aria-current="page" href="{% url 'signup' %}"> Crear Usuario </a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'login' %}"> Ingresar </a>
-          </li>
-          {% endif%}        
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'pet-mine' %}"> Mis Publicaciones </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'mensaje-list' %}"> Mis Mensajes </a>
+            </li>
+
+            {% if user.imagen %}
+            <img src="{{user.profile.imagen.url}}" height="100%" width="36px" style= "border-radius:50%">
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'logout' %}"> {{ user.username }} | Salir </a>
+            </li>
+          {% else %} 
+              <li class="nav-item">       
+                <a class="nav-link active" aria-current="page" href="{% url 'signup' %}"> Crear Usuario </a>
+              </li>
+
+              
+
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'login' %}"> Ingresar </a>
+              </li>
+          {% endif%}  
+          <li class="nav-item">       
+            <a class="nav-link active" aria-current="page" href="{% url 'mensaje-create' %}"> Enviar Mensaje </a>
+          </li>     
           
 
           

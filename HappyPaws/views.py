@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DetailView,DeleteView
 #from django.views.generic.detail import DetailView
-from HappyPaws.models import Pet,Profile
+from HappyPaws.models import Pet,Profile,Mensaje
 from HappyPaws.forms import PetForms,BuscarPetForm
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
@@ -14,16 +14,14 @@ def index(request):
     }
     return render(request,"HappyPaws/index.html",context)
 
-
-def crearmascota(request):
-    f=PetForms()
-    f=PetForms(request.POST)
-    context = {'f':f}
-
-    return render(request,"HappyPaws/crear_mascota.html",context)
-
 class PetList(ListView):
-    model=Pet
+    model=Pet    
+
+class PetMineList(LoginRequiredMixin, PetList):
+    
+    def get_queryset(self):
+        return Pet.objects.filter(owner=self.request.user.id).all()
+
 
 class PetDetail(DetailView):
     model=Pet
@@ -40,9 +38,8 @@ class PetUpdate(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 
     def test_func(self):
         user_id = self.request.user.id
-        pet_id = self.kwargs.get("pk")
-        return Pet.objects.filter(owner=user_id, id=pet_id).exists()
-    
+        pet_id = self.kwargs.get("pk") # Obtiene el id del post a través de la url pasada
+        return Pet.objects.filter(owner=user_id, id=pet_id).exists() # Verifica si existe el un post de ese usuario con ese id en la BD
     def handle_no_permission(self):
         return render(self.request,"HappyPaws/not_found.html")
 
@@ -64,9 +61,14 @@ class BuscarPet(ListView):
     def get_queryset(self):
         f = BuscarPetForm(self.request.GET)
         if f.is_valid():
-                return Pet.objects.filter(raza__icontains= f.data["criterio_raza"]).all() #__icontains filtra todas las palabras que contengan la cadena ingresada en nombre
-
+                if f.data["criterio_ciudad"] == "":
+                    return Pet.objects.filter(raza__icontains= f.data["criterio_raza"]).all() #__icontains filtra todas las palabras que contengan la cadena ingresada en nombre
+                elif f.data["criterio_raza"] == "":
+                    return Pet.objects.filter(ciudad__icontains= f.data["criterio_ciudad"]).all()
+                 
         return Pet.objects.none()
+    
+
     
 class SignUp(CreateView):
     form_class=UserCreationForm
@@ -79,10 +81,38 @@ class Login(LoginView):
 class Logout(LogoutView):
     template_name='registration/logout.html'
 
+
 class ProfileUpdate(UpdateView):
     model=Profile
     success_url= reverse_lazy("index")
     fields='__all__'
+
+class ProfileCreate(CreateView):
+    model=Profile
+    success_url= reverse_lazy("index")
+    fields='__all__'
+
+class MensajeCreate(CreateView):
+    model=Mensaje
+    success_url= reverse_lazy("index")
+    fields='__all__'
+
+class MensajeList(LoginRequiredMixin, ListView):
+    model=Mensaje
+    success_url= reverse_lazy("index")
+    fields='__all__'
+    
+    def get_queryset(self):
+        return Mensaje.objects.filter(destinatario = self.request.user.id).all()
+
+class MensajeDelete(DeleteView):
+    model=Mensaje
+    success_url= reverse_lazy("mensaje-list")
+
+class MensajeDetail(DetailView):
+    model=Mensaje
+
+
 
 
 

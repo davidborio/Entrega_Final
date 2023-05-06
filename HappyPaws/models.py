@@ -14,13 +14,19 @@ class Pet(models.Model):
     imagen=models.ImageField(upload_to="images",null=True,blank=True)
     descripcion=models.CharField(max_length=300)
 
-
     def __str__(self):
         return f"Id: {self.id} - Raza: {self.raza} - Nombre: {self.nombre} - Estado: {self.estado}"
     
 class Profile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE,related_name="profile")
     imagen=models.ImageField(upload_to="profiles",null=True,blank=True)
+
+class Mensaje(models.Model):
+    mensaje=models.TextField(max_length=1500)
+    mail=models.EmailField()
+    destinatario=models.ForeignKey(to=User, on_delete=models.CASCADE,related_name="destinatario")
+    def __str__(self):
+        return f"Mail: {self.mail}"
 
         
 

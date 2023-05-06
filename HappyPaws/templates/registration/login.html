@@ -10,8 +10,8 @@
     
     <form method="POST">           <!-- no usa action porque usa la misma url para escribir en la BD-->
      
-    {% csrf_token %}   
-     {{form.as_p}}
+        {% csrf_token %}   
+        {{form.as_p}}
 
     <input type="submit" value="Entrar">
    
@@ -19,7 +19,5 @@
       
 
 </ul>
-
-
 
 {% endblock %}

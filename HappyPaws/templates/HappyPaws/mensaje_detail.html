@@ -1,0 +1,35 @@
+{% extends "HappyPaws/base.html" %}
+{% load static %}
+
+{% block main%}
+
+
+<p>
+    <ul>
+        <br>
+        <li>    
+        Mensaje : {{mensaje.mensaje}}
+        </li>        
+        <br>
+        <li>
+        Mail contacto: {{mensaje.mail}}
+        </li> 
+        <br>    
+        <a href="{% url 'mensaje-delete' mensaje.id %}">Borrar Mensaje</a>
+
+
+    </ul> 
+
+</p> 
+
+
+<br>
+
+<a href="{% url 'mensaje-list' %}"> Volver </a>
+
+{% endblock %}
+
+
+
+
+

@@ -7,26 +7,48 @@
 {% endif %}
 
 {{object}}
-<br>
-Nombre: {{object.nombre}}
-<br>
-Raza:  {{object.raza}}
-<br>
-Publicado el: {{object.fecha}}
-<br>
-Teléfono de contacto: {{object.tel}}
-<br>
-"Mail de contacto: "{{object.mail}}
-<br>
-Ciudad:  {{object.ciudad}}
-<br>
-Estado: {{object.estado}} 
-<br>
-Descripción: {{object.descripcion}}
+<p>
+    <ul>
+        <br>
+        <li>
+            Nombre: {{object.nombre}}
+        </li>
+        <br>
+        <li>
+            Raza:  {{object.raza}}
+            
+        </li>
+        <br>
+        <li>
+            Estado:  {{object.estado}}
+        </li>
+        <br>
+        <li>
+            Publicado el: {{object.fecha}}
+        </li>
+        <br>
+        <li>
+            Teléfono de contacto: {{object.tel}}
+        </li>
+        <br>
+        <li>
+            Ciudad:  {{object.ciudad}}
+        </li>
+        <br>
+        <li>
+            Teléfono de contacto: {{object.tel}}
+        </li>
+        <br>
+        <li>
+            Mail de contacto:  {{object.mail}}
+        </li>
+        <br>
+        <li>
+            Descripción: {{object.descripcion}}
+        </li>
+        <br>
 
-
-
-<br>
+</p>
 
 <a href="{% url 'pet-list' %}"> Volver </a>
 

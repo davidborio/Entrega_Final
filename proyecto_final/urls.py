@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from HappyPaws.views import (index, PetList,
-                             PetDetail,PetCreate,PetUpdate,PetDelete,BuscarPet, SignUp, Login,Logout,ProfileUpdate)
+from HappyPaws.views import (index, PetList,PetMineList,
+                             PetDetail,PetCreate,PetUpdate,PetDelete,BuscarPet, SignUp, Login,Logout, 
+                             ProfileCreate, ProfileUpdate, MensajeCreate, MensajeList, MensajeDelete, MensajeDetail,)
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",index, name="index"),    
     path("pet/list", PetList.as_view(), name="pet-list"),
+    path("pet/list/mine", PetMineList.as_view(), name="pet-mine"),
     path("pet/<pk>/detail", PetDetail.as_view(), name="pet-detail"),
     path("pet/create", PetCreate.as_view(), name="pet-create"),
     path("pet/<pk>/update", PetUpdate.as_view(), name="pet-update"),
@@ -33,7 +35,12 @@ urlpatterns = [
     path("signup/", SignUp.as_view(), name="signup"),
     path("login/", Login.as_view(), name="login"),
     path("logout/", Logout.as_view(), name="logout"),
-    path("profile/<pk>/update", ProfileUpdate.as_view(), name="profile-update")
-    
+    path("profile/create", ProfileCreate.as_view(), name="profile-create"),
+    #path("profile/<pk>/update", ProfileUpdate.as_view(), name="profile-update"),
+    path("mensaje/create", MensajeCreate.as_view(), name="mensaje-create"),
+    path("mensaje/list", MensajeList.as_view(), name="mensaje-list"),
+    path("mensaje/<pk>/delete", MensajeDelete.as_view(), name="mensaje-delete"),
+    path("mensaje/<pk>/detail", MensajeDetail.as_view(), name="mensaje-detail"),
+        
     ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
