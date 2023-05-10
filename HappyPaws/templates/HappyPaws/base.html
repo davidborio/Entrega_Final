@@ -57,13 +57,9 @@
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       
-      {% if user.profile.image %}
-        <a href="{% url 'profile-update' user.profile.id %}">           
-        <img src="{{user.profile.imagen.url}}" width="36px" height="100%" style="border:50%; margin-right: 10px ;">      
-        </a>
-       {% else%}
+      
       <a class="navbar-brand" href="{% url 'index' %}"> Happy Paws </a>
-      {% endif %}
+      
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -84,36 +80,48 @@
 
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'mensaje-list' %}"> Mis Mensajes </a>
-            </li>
+            </li>               
+            
+            
+            <li class="nav-item">       
+              <a class="nav-link active" aria-current="page" href="{% url 'mensaje-create' %}"> Enviar Mensaje </a>
+            </li>  
 
-            {% if user.imagen %}
-            <img src="{{user.profile.imagen.url}}" height="100%" width="36px" style= "border-radius:50%">
+            {% if user.profile.avatar %}
+            <a href="{% url 'profile-update' user.profile.id %}">           
+             <img src="{{user.profile.avatar.url}}" width="48px" height="100%" style="border-radius:50%;">      
+            </a>
+
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'profile-create' %}"> Crear Avatar </a>
+            </li>
             {% endif %}
+                                   
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'logout' %}"> {{ user.username }} | Salir </a>
             </li>
-          {% else %} 
-              <li class="nav-item">       
-                <a class="nav-link active" aria-current="page" href="{% url 'signup' %}"> Crear Usuario </a>
-              </li>
+        {% else %}
+            <li class="nav-item">       
+              <a class="nav-link active" aria-current="page" href="{% url 'signup' %}"> Crear Usuario </a>
+            </li>              
 
-              
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'login' %}"> Ingresar </a>
+            </li>
+            
+            {% endif %}
 
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'login' %}"> Ingresar </a>
-              </li>
-          {% endif%}  
-          <li class="nav-item">       
-            <a class="nav-link active" aria-current="page" href="{% url 'mensaje-create' %}"> Enviar Mensaje </a>
-          </li>     
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'aboutme' %}"> Acerca de mí </a>
+            </li>
+                      
+                
           
 
           
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        
       </div>
     </div>
   </nav>

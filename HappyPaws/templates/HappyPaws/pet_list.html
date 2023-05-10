@@ -7,7 +7,13 @@
 <p>
    
     <ul>
-        <h1> ~Publicaciones~ </h1>         
+        <h1> ~Publicaciones~ </h1> 
+        
+    {% if not pets %}
+    <h4> No hay Mascotas Publicadas </h4>
+    {% endif %}     
+        
+    
     
         
     {% for pet in object_list %}

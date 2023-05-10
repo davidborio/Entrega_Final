@@ -10,7 +10,7 @@ class Pet(models.Model):
     mail=models.EmailField(max_length=100)
     ciudad=models.CharField(max_length=50)
     estado=models.CharField(max_length=100, default="En adopción")
-    owner=models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="owner")
+    owner= models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="owner")
     imagen=models.ImageField(upload_to="images",null=True,blank=True)
     descripcion=models.CharField(max_length=300)
 
@@ -18,15 +18,21 @@ class Pet(models.Model):
         return f"Id: {self.id} - Raza: {self.raza} - Nombre: {self.nombre} - Estado: {self.estado}"
     
 class Profile(models.Model):
-    user = models.OneToOneField(to=User, on_delete=models.CASCADE,related_name="profile")
-    imagen=models.ImageField(upload_to="profiles",null=True,blank=True)
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name="profile")
+    avatar=models.ImageField(upload_to="profiles",null=True,blank=True)
+
+    @property
+    def image_url(self):
+        return self.image.url if self.image else ''
+    
 
 class Mensaje(models.Model):
     mensaje=models.TextField(max_length=1500)
-    mail=models.EmailField()
-    destinatario=models.ForeignKey(to=User, on_delete=models.CASCADE,related_name="destinatario")
+    mail_contacto=models.EmailField()
+    enviado_el=models.DateTimeField(auto_now_add=True)
+    destinatario=models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="destinatario")
     def __str__(self):
-        return f"Mail: {self.mail}"
+        return f"De: {self.mail_contacto}"
 
         
 

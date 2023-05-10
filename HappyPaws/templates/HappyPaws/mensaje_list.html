@@ -3,13 +3,21 @@
 {% block main %}
 
 <p>
-    <ul>
-        <h1> ~Lista de Mensajes~ </h1>
+    
+<ul>
+
+    <h1> ~Lista de Mensajes~ </h1>
+    {% if not mensajes %}
+    <h4> No hay Mensajes en la casilla </h4>
+    {% endif %}     
+
 
       
-    {% for mensaje in object_list %}
+    {% for mensaje in mensajes %}
         <br>
-        <li>                
+        <li> 
+            Enviado el: {{mensaje.enviado_el}}
+            <br>               
             {{mensaje}}   
             <a href= "{% url 'mensaje-detail' mensaje.id %}" > Ver Mensaje </a>  /
             <a href= "{% url 'mensaje-delete' mensaje.id %}"> Borrar Mensaje </a>         

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from HappyPaws.views import (index, PetList,PetMineList,
+from HappyPaws.views import (index, aboutme, PetList,PetMineList,
                              PetDetail,PetCreate,PetUpdate,PetDelete,BuscarPet, SignUp, Login,Logout, 
                              ProfileCreate, ProfileUpdate, MensajeCreate, MensajeList, MensajeDelete, MensajeDetail,)
 
@@ -24,7 +24,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",index, name="index"),    
+    path("",index, name="index"),
+    path("",aboutme, name="aboutme"),    
     path("pet/list", PetList.as_view(), name="pet-list"),
     path("pet/list/mine", PetMineList.as_view(), name="pet-mine"),
     path("pet/<pk>/detail", PetDetail.as_view(), name="pet-detail"),
@@ -36,7 +37,7 @@ urlpatterns = [
     path("login/", Login.as_view(), name="login"),
     path("logout/", Logout.as_view(), name="logout"),
     path("profile/create", ProfileCreate.as_view(), name="profile-create"),
-    #path("profile/<pk>/update", ProfileUpdate.as_view(), name="profile-update"),
+    path("profile/<pk>/update", ProfileUpdate.as_view(), name="profile-update"),
     path("mensaje/create", MensajeCreate.as_view(), name="mensaje-create"),
     path("mensaje/list", MensajeList.as_view(), name="mensaje-list"),
     path("mensaje/<pk>/delete", MensajeDelete.as_view(), name="mensaje-delete"),

@@ -8,6 +8,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin , UserPassesTestMixin
 
+def aboutme(request):
+    return render(request,"HappyPaws/aboutme.html")
+
 def index(request):
     context={
         "pets":Pet.objects.all()
@@ -15,7 +18,8 @@ def index(request):
     return render(request,"HappyPaws/index.html",context)
 
 class PetList(ListView):
-    model=Pet    
+    model=Pet 
+    context_object_name= "pets"   
 
 class PetMineList(LoginRequiredMixin, PetList):
     
@@ -34,7 +38,7 @@ class PetCreate(LoginRequiredMixin,CreateView):
 class PetUpdate(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model=Pet
     success_url= reverse_lazy("pet-list")
-    fields="__all__"
+    fields= ["nombre","raza","tel","mail","ciudad","estado","imagen","descripcion"]
 
     def test_func(self):
         user_id = self.request.user.id
@@ -66,8 +70,7 @@ class BuscarPet(ListView):
                 elif f.data["criterio_raza"] == "":
                     return Pet.objects.filter(ciudad__icontains= f.data["criterio_ciudad"]).all()
                  
-        return Pet.objects.none()
-    
+        return Pet.objects.none()    
 
     
 class SignUp(CreateView):
@@ -82,15 +85,22 @@ class Logout(LogoutView):
     template_name='registration/logout.html'
 
 
-class ProfileUpdate(UpdateView):
-    model=Profile
-    success_url= reverse_lazy("index")
-    fields='__all__'
+class ProfileCreate(LoginRequiredMixin, CreateView):
+    model = Profile
+    success_url = reverse_lazy("index")
+    fields = ['avatar']
 
-class ProfileCreate(CreateView):
-    model=Profile
-    success_url= reverse_lazy("index")
-    fields='__all__'
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class ProfileUpdate(LoginRequiredMixin, UserPassesTestMixin,  UpdateView):
+    model = Profile
+    success_url = reverse_lazy("index")
+    fields = ['avatar']
+
+    def test_func(self):
+        return Profile.objects.filter(user=self.request.user).exists()
 
 class MensajeCreate(CreateView):
     model=Mensaje
@@ -99,6 +109,7 @@ class MensajeCreate(CreateView):
 
 class MensajeList(LoginRequiredMixin, ListView):
     model=Mensaje
+    context_object_name = "mensajes"
     success_url= reverse_lazy("index")
     fields='__all__'
     
